@@ -1,0 +1,6 @@
+#Include build libraries for benchmarks in MR3 Repo, to prevent unnessacary building every time
+#target/
+#tpcds_kit.zip
+#tpch_kit.zip
+#*.sql.log
+#derby.log

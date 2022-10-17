@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<configuration>
+
+<!-- fs.defaultFS is set by HADOOP_HOME_LOCAL in env.sh -->
+
+<property>
+  <name>mr3.runtime</name>
+  <value>tez</value>
+</property>
+
+<property>
+  <name>mr3.master.mode</name>
+  <value>local-thread</value>
+  <description>
+    local-thread: run DAGAppMaster in the same process of MR3Client in client side
+    local-process: run DAGAppMaster in a separate process in client side
+    yarn: run DAGAppMaster in a container in cluster side
+  </description>
+</property>
+
+<property>
+  <name>mr3.am.worker.mode</name>
+  <value>local</value>
+</property>
+
+<property>
+  <name>mr3.am.resource.memory.mb</name>
+  <value>25600</value>
+</property>
+
+<property>
+  <name>mr3.am.local.resourcescheduler.max.memory.mb</name>
+  <value>24576</value>
+  <description>
+    For local testing, set: HIVE_CLIENT_HEAPSIZE=32768, MR3_AM_HEAPSIZE=28672
+  </description>
+</property>
+
+<property>
+  <name>mr3.am.local.resourcescheduler.max.cpu.cores</name>
+  <value>128</value>
+</property>
+
+<property>
+  <name>mr3.cluster.additional.classpath</name>
+  <value>${amprocess.classpath}</value>
+</property>
+
+<property>
+  <name>mr3.cluster.use.hadoop-libs</name>
+  <value>${tez.use.minimal}</value>
+</property>
+
+<property>
+  <name>mr3.am.launch.cmd-opts</name>
+  <value>-server -Djava.net.preferIPv4Stack=true -Dhadoop.metrics.log.level=WARN -XX:+PrintGCDetails -verbose:gc -XX:+PrintGCTimeStamps -XX:+UseNUMA -XX:+UseParallelGC</value>
+</property>
+
+<property>
+  <name>mr3.am.staging-dir</name>
+  <value>/tmp/${user.name}/staging</value>
+</property>
+
+<property>
+  <name>mr3.am.local.working-dir</name>
+  <value>/tmp/${user.name}/working-dir</value>
+</property>
+
+<property>
+  <name>mr3.am.local.log-dir</name>
+  <value>/tmp/${user.name}/log-dir</value>
+</property>
+
+<!-- container -->
+
+<property>
+  <name>mr3.container.resourcescheduler.type</name>
+  <value>local</value>
+</property>
+
+<!-- we leave mr3.container.launch.cmd-opts explicitly as empty to indicate that the value is not used -->
+<property>
+  <name>mr3.container.launch.cmd-opts</name>
+  <value></value>
+</property>
+
+<property>
+  <name>mr3.container.reuse</name>
+  <value>true</value>
+</property>
+
+<property>
+  <name>mr3.container.stop.cross.dag.reuse</name>
+  <value>false</value>
+</property>
+
+<property>
+  <name>mr3.container.runtime.auto.start.input</name>
+  <value>false</value>
+</property>
+
+<!-- custom configurations -->
+
+<!-- Tez runtime for internal testing -->
+
+<property>
+  <name>mr3.base.resource.memory.mb</name>
+  <value>256</value>
+</property>
+
+<property>
+  <name>mr3.map.task.resource.scale</name>
+  <value>1</value>
+</property>
+
+<property>
+  <name>mr3.reduce.task.resource.scale</name>
+  <value>1</value>
+</property>
+
+<property>
+  <name>mr3.daemon.task.resource.scale</name>
+  <value>1</value>
+</property>
+
+<property>
+  <name>mr3.map.containergroup.resource.scale</name>
+  <value>1</value>
+</property>
+
+<property>
+  <name>mr3.reduce.containergroup.resource.scale</name>
+  <value>1</value>
+</property>
+
+<property>
+  <name>mr3.container.localize.python.working.dir.unsafe</name>
+  <value>true</value>
+</property>
+
+</configuration>
